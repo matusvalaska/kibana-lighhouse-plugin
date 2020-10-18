@@ -11,6 +11,8 @@ import {
 } from '@elastic/eui';
 // import { FormattedMessage } from '@kbn/i18n/react';
 import { SummaryHeading } from '../summaryHeading';
+import ReportViewer from 'react-lighthouse-viewer';
+import jsonReport from '/Users/matusvalaska/Documents/GitHub_Repo/kibana/plugins/kibana-lighhouse-plugin/data/www.csob.sk-20201019T005738.json';
 
 export class Main extends React.Component {
   constructor(props) {
@@ -38,20 +40,21 @@ export class Main extends React.Component {
             </EuiTitle>
           </EuiPageHeader>
           <EuiPageContent>
-            <EuiPageContentHeader>
+            {/*<EuiPageContentHeader>*/}
               {/*<EuiTitle>*/}
               {/*  <h2>Congratulations</h2>*/}
               {/*</EuiTitle>*/}
-              <SummaryHeading />
-              <div>
-                <hr className="euiHorizontalRule euiHorizontalRule--full euiHorizontalRule--marginLarge" />
-              </div>
-            </EuiPageContentHeader>
+              {/*<SummaryHeading />*/}
+            {/*  <div>*/}
+            {/*    <hr className="euiHorizontalRule euiHorizontalRule--full euiHorizontalRule--marginLarge" />*/}
+            {/*  </div>*/}
+            {/*</EuiPageContentHeader>*/}
             <EuiPageContentBody>
-              <EuiText>
-                <h3>You have successfully created your first Kibana Plugin!</h3>
-                <p>The server time (via API call)</p>
-              </EuiText>
+              {/*<EuiText>*/}
+              {/*  <h3>You have successfully created your first Kibana Plugin!</h3>*/}
+              {/*  <p>The server time (via API call)</p>*/}
+              {/*</EuiText>*/}
+              <ReportViewer json={jsonReport} />
             </EuiPageContentBody>
           </EuiPageContent>
         </EuiPageBody>
