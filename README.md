@@ -1,4 +1,4 @@
-# lighthouse-plugin
+# kibana-lighthouse-plugin
 
 > Lighthouse audit plugin
 

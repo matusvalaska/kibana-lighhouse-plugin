@@ -8,14 +8,14 @@ import { Main } from './components/main';
 
 const app = uiModules.get('apps/lighthousePlugin');
 
-app.config($locationProvider => {
+app.config(($locationProvider) => {
   $locationProvider.html5Mode({
     enabled: false,
     requireBase: false,
     rewriteLinks: false,
   });
 });
-app.config(stateManagementConfigProvider => stateManagementConfigProvider.disable());
+app.config((stateManagementConfigProvider) => stateManagementConfigProvider.disable());
 
 function RootController($scope, $element, $http) {
   const domNode = $element[0];

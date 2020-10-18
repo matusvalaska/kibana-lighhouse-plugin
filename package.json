@@ -1,10 +1,10 @@
 {
-  "name": "lighthouse_plugin",
+  "name": "kibana-lighthouse-plugin",
   "version": "0.0.0",
   "description": "Lighthouse audit plugin",
   "main": "index.js",
   "kibana": {
-    "version": "7.6.2",
+    "version": "7.7.1",
     "templateVersion": "1.0.0"
   },
   "scripts": {

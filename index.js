@@ -5,21 +5,21 @@ import { i18n } from '@kbn/i18n';
 
 import exampleRoute from './server/routes/example';
 
-export default function(kibana) {
+export default function (kibana) {
   return new kibana.Plugin({
     require: ['elasticsearch'],
-    name: 'lighthouse_plugin',
+    name: 'kibana-lighthouse-plugin',
     uiExports: {
       app: {
         title: 'Lighthouse Plugin',
         description: 'Lighthouse audit plugin',
-        main: 'plugins/lighthouse_plugin/app',
+        main: 'plugins/kibana-lighthouse-plugin/app',
       },
-      hacks: ['plugins/lighthouse_plugin/hack'],
+      hacks: ['plugins/kibana-lighthouse-plugin/hack'],
       styleSheetPaths: [
         resolve(__dirname, 'public/app.scss'),
         resolve(__dirname, 'public/app.css'),
-      ].find(p => existsSync(p)),
+      ].find((p) => existsSync(p)),
     },
 
     config(Joi) {
@@ -32,7 +32,7 @@ export default function(kibana) {
     init(server, options) {
       const xpackMainPlugin = server.plugins.xpack_main;
       if (xpackMainPlugin) {
-        const featureId = 'lighthouse_plugin';
+        const featureId = 'kibana-lighthouse-plugin';
 
         xpackMainPlugin.registerFeature({
           id: featureId,
