@@ -24,7 +24,7 @@ export class Main extends React.Component {
        manage state and update your UI than this.
     */
     const { httpClient } = this.props;
-    httpClient.get('../api/kibana-lighthouse-plugin/example').then(resp => {
+    httpClient.get('../api/kibana-lighthouse-plugin/example').then((resp) => {
       this.setState({ time: resp.data.time });
     });
   }
