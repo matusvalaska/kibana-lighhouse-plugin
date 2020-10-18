@@ -1,0 +1,9 @@
+{
+  "paths": {
+    "lighthousePlugin": "./"
+  },
+  "translations": [
+    "translations/zh-CN.json"
+  ]
+}
+
