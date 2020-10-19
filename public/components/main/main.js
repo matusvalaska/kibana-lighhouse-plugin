@@ -12,10 +12,10 @@ import {
   EuiText,
 } from '@elastic/eui';
 // import { FormattedMessage } from '@kbn/i18n/react';
-import { SummaryHeading } from '../summaryHeading';
+// import { SummaryHeading } from '../summaryHeading';
 import moment from 'moment';
 import ReportViewer from 'react-lighthouse-viewer';
-import jsonReport from '../../../data/www.csob.sk-20201019T005738.json';
+import axios from 'axios';
 
 export class Main extends React.Component {
   constructor(props) {
@@ -23,10 +23,19 @@ export class Main extends React.Component {
     this.state = {
       startDate: moment(),
       endDate: moment().add(11, 'd'),
+      isLoading: true,
+      jsonReportApi: undefined,
     };
 
     this.handleChangeStart = this.handleChangeStart.bind(this);
     this.handleChangeEnd = this.handleChangeEnd.bind(this);
+  }
+
+  componentDidMount() {
+    axios.get('http://localhost:5000/').then((response) => {
+      this.setState({ jsonReportApi: JSON.parse(response.data.message) });
+      this.setState({ isLoading: false });
+    });
   }
 
   handleChangeStart(date) {
@@ -41,17 +50,21 @@ export class Main extends React.Component {
     });
   }
 
-  componentDidMount() {
-    /*
-       FOR EXAMPLE PURPOSES ONLY.  There are much better ways to
-       manage state and update your UI than this.
-    */
-    const { httpClient } = this.props;
-    httpClient.get('../api/kibana-lighthouse-plugin/example').then((resp) => {
-      this.setState({ time: resp.data.time });
-    });
-  }
+  // componentDidMount() {
+  //   /*
+  //      FOR EXAMPLE PURPOSES ONLY.  There are much better ways to
+  //      manage state and update your UI than this.
+  //   */
+  //   const { httpClient } = this.props;
+  //   httpClient.get('../api/kibana-lighthouse-plugin/example').then((resp) => {
+  //     this.setState({ time: resp.data.time });
+  //   });
+  // }
   render() {
+    const { isLoading, jsonReportApi } = this.state;
+    if (isLoading) {
+      return <div className="App">Loading...</div>;
+    }
     return (
       <EuiPage>
         <EuiPageBody>
@@ -98,7 +111,7 @@ export class Main extends React.Component {
             </EuiPageContentHeader>
             <EuiPageContentBody>
               <EuiPageContent>
-                <ReportViewer json={jsonReport} />
+                <ReportViewer json={jsonReportApi} />
               </EuiPageContent>
             </EuiPageContentBody>
           </EuiPageContent>
