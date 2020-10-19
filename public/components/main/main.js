@@ -15,7 +15,7 @@ import {
 import { SummaryHeading } from '../summaryHeading';
 import moment from 'moment';
 import ReportViewer from 'react-lighthouse-viewer';
-import jsonReport from '/Users/matusvalaska/Documents/GitHub_Repo/kibana/plugins/kibana-lighhouse-plugin/data/www.csob.sk-20201019T005738.json';
+import jsonReport from '../../../data/www.csob.sk-20201019T005738.json';
 
 export class Main extends React.Component {
   constructor(props) {
