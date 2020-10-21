@@ -9,11 +9,11 @@ import {
   EuiPageContentBody,
   EuiDatePicker,
   EuiDatePickerRange,
-  EuiText,
 } from '@elastic/eui';
 // import { FormattedMessage } from '@kbn/i18n/react';
 // import { SummaryHeading } from '../summaryHeading';
 import moment from 'moment';
+// import Cookies from 'js-cookie';
 import ReportViewer from 'react-lighthouse-viewer';
 import axios from 'axios';
 
@@ -25,6 +25,8 @@ export class Main extends React.Component {
       endDate: moment().add(11, 'd'),
       isLoading: true,
       jsonReportApi: undefined,
+      // cookie: Cookies.get('set-cookie'),
+      searchTerm: '?lte=1000&gte=3000&',
     };
 
     this.handleChangeStart = this.handleChangeStart.bind(this);
@@ -35,6 +37,11 @@ export class Main extends React.Component {
     axios.get('http://localhost:5000/').then((response) => {
       this.setState({ jsonReportApi: JSON.parse(response.data.message) });
       this.setState({ isLoading: false });
+    });
+    const { httpClient } = this.props;
+    httpClient.get('../api/kibana-lighthouse-plugin/elasticApi').then((resp) => {
+      this.setState({ resp: resp.data });
+      console.log(resp);
     });
   }
 
@@ -49,22 +56,14 @@ export class Main extends React.Component {
       endDate: date,
     });
   }
-
-  // componentDidMount() {
-  //   /*
-  //      FOR EXAMPLE PURPOSES ONLY.  There are much better ways to
-  //      manage state and update your UI than this.
-  //   */
-  //   const { httpClient } = this.props;
-  //   httpClient.get('../api/kibana-lighthouse-plugin/example').then((resp) => {
-  //     this.setState({ time: resp.data.time });
-  //   });
-  // }
   render() {
     const { isLoading, jsonReportApi } = this.state;
     if (isLoading) {
       return <div className="App">Loading...</div>;
     }
+    console.log(this.state.startDate.unix() * 1000);
+    console.log(this.state.endDate.unix() * 1000);
+    // console.log(this.state.cookie);
     return (
       <EuiPage>
         <EuiPageBody>
@@ -100,13 +99,6 @@ export class Main extends React.Component {
                     />
                   }
                 />
-                {/*<EuiTitle>*/}
-                {/*  <h2>Congratulations</h2>*/}
-                {/*</EuiTitle>*/}
-                {/*<SummaryHeading />*/}
-                {/*  <div>*/}
-                {/*    <hr className="euiHorizontalRule euiHorizontalRule--full euiHorizontalRule--marginLarge" />*/}
-                {/*  </div>*/}
               </EuiPageContent>
             </EuiPageContentHeader>
             <EuiPageContentBody>
