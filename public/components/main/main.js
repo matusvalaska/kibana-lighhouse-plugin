@@ -10,23 +10,15 @@ import {
   EuiDatePicker,
   EuiDatePickerRange,
 } from '@elastic/eui';
-// import { FormattedMessage } from '@kbn/i18n/react';
-// import { SummaryHeading } from '../summaryHeading';
+import { ReportsList } from '../reportsList';
 import moment from 'moment';
-// import Cookies from 'js-cookie';
-import ReportViewer from 'react-lighthouse-viewer';
-import axios from 'axios';
 
 export class Main extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      startDate: moment(),
-      endDate: moment().add(11, 'd'),
-      isLoading: true,
-      jsonReportApi: undefined,
-      // cookie: Cookies.get('set-cookie'),
-      searchTerm: '?lte=1000&gte=3000&',
+      startDate: moment().add(-3, 'd'),
+      endDate: moment(),
     };
 
     this.handleChangeStart = this.handleChangeStart.bind(this);
@@ -34,15 +26,7 @@ export class Main extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:5000/').then((response) => {
-      this.setState({ jsonReportApi: JSON.parse(response.data.message) });
-      this.setState({ isLoading: false });
-    });
-    const { httpClient } = this.props;
-    httpClient.get('../api/kibana-lighthouse-plugin/elasticApi').then((resp) => {
-      this.setState({ resp: resp.data });
-      console.log(resp);
-    });
+
   }
 
   handleChangeStart(date) {
@@ -57,13 +41,6 @@ export class Main extends React.Component {
     });
   }
   render() {
-    const { isLoading, jsonReportApi } = this.state;
-    if (isLoading) {
-      return <div className="App">Loading...</div>;
-    }
-    console.log(this.state.startDate.unix() * 1000);
-    console.log(this.state.endDate.unix() * 1000);
-    // console.log(this.state.cookie);
     return (
       <EuiPage>
         <EuiPageBody>
@@ -103,7 +80,9 @@ export class Main extends React.Component {
             </EuiPageContentHeader>
             <EuiPageContentBody>
               <EuiPageContent>
-                <ReportViewer json={jsonReportApi} />
+                <React.Fragment>
+                  <ReportsList startDate={this.state.startDate} endDate={this.state.endDate} />
+                </React.Fragment>
               </EuiPageContent>
             </EuiPageContentBody>
           </EuiPageContent>

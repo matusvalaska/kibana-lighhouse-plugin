@@ -1,1 +1,0 @@
-export { SummaryHeading } from './summaryHeading';
