@@ -44,8 +44,8 @@ export class ReportsList extends React.Component {
       });
   };
   getReportsData = () => {
-    this.getMockedData();
-    // this.getElasticSearchData();
+    // this.getMockedData();
+    this.getElasticSearchData();
   };
   testFunction = () => {
     console.log('myPassedTest');

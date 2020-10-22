@@ -1,7 +1,8 @@
 // import elasticsearch from 'elasticsearch';
 const { Client } = require('@elastic/elasticsearch');
 
-const elasticsearchHost = 'http://192.168.1.11:9200';
+// const elasticsearchHost = 'http://192.168.1.11:9200';
+const elasticsearchHost = 'http://10.244.7.29:9200';
 const elasticsearchIndex = 'speed-000003';
 
 function getIndexRequestBody(gte, lte) {
@@ -14,7 +15,7 @@ export default function (server) {
     format: 'JSON',
   };
   callWithInternalUser('cat.indices', internalQuery).then((response) => {
-    // console.log('Cluster indices:' + response);
+    console.log('Cluster indices:' + response);
     const client = new Client({
       node: elasticsearchHost,
     });
