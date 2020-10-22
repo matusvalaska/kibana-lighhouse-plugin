@@ -53,7 +53,6 @@ export class Main extends React.Component {
             <EuiPageContentHeader>
               <EuiPageContent>
                 <EuiDatePickerRange
-                  style={{ width: '800px' }}
                   startDateControl={
                     <EuiDatePicker
                       selected={this.state.startDate}
@@ -61,7 +60,7 @@ export class Main extends React.Component {
                       startDate={this.state.startDate}
                       endDate={this.state.endDate}
                       isInvalid={this.state.startDate > this.state.endDate}
-                      dateFormat="MMM DD, YYYY HH:mm:ss.S"
+                      dateFormat="MMM DD, YYYY HH:mm:ss"
                       timeFormat="HH:mm"
                       aria-label="Start date"
                       showTimeSelect
@@ -74,7 +73,7 @@ export class Main extends React.Component {
                       startDate={this.state.startDate}
                       endDate={this.state.endDate}
                       isInvalid={this.state.startDate > this.state.endDate}
-                      dateFormat="MMM DD, YYYY HH:mm:ss.S"
+                      dateFormat="MMM DD, YYYY HH:mm:ss"
                       timeFormat="HH:mm"
                       aria-label="End date"
                       showTimeSelect
