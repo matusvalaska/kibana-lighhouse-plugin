@@ -43,21 +43,23 @@ export default function (kibana) {
           navLinkId: featureId,
           icon: 'questionInCircle',
           app: [featureId, 'kibana'],
-          catalogue: [],
+          catalogue: ['discover'],
           privileges: {
             all: {
-              api: [],
+              app: ['kibana'],
+              catalogue: ['discover'],
               savedObject: {
-                all: [],
-                read: [],
+                all: ['search', 'query'],
+                read: ['index-pattern'],
               },
               ui: ['show'],
             },
             read: {
-              api: [],
+              app: ['kibana'],
+              catalogue: ['discover'],
               savedObject: {
                 all: [],
-                read: [],
+                read: ['index-pattern', 'search', 'query'],
               },
               ui: ['show'],
             },
