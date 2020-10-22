@@ -46,7 +46,7 @@ export default function (kibana) {
           catalogue: ['discover'],
           privileges: {
             all: {
-              app: ['kibana'],
+              app: [featureId, 'kibana'],
               catalogue: ['discover'],
               savedObject: {
                 all: ['search', 'query'],
@@ -55,7 +55,7 @@ export default function (kibana) {
               ui: ['show'],
             },
             read: {
-              app: ['kibana'],
+              app: [featureId, 'kibana'],
               catalogue: ['discover'],
               savedObject: {
                 all: [],
