@@ -10,26 +10,25 @@ function getIndexRequestBody(gte, lte) {
 }
 
 export default function (server) {
-  const { callWithInternalUser } = server.plugins.elasticsearch.getCluster('data');
+  const { callWithRequest } = server.plugins.elasticsearch.getCluster('data');
   server.route({
     path: '/api/kibana-lighthouse-plugin/elasticApi/lighthouse/report',
     method: 'GET',
     async handler(req, reply) {
-      let resp = {};
       const internalQuery = {
         format: 'JSON',
         index: elasticsearchIndex,
+        size: 10,
         body: JSON.parse(getIndexRequestBody(req.query.gte, req.query.lte)),
       };
       try {
-        return await callWithInternalUser('search', internalQuery).then((response) => {
+        return await callWithRequest(req, 'search', internalQuery).then((response) => {
           console.log('Cluster indices:' + JSON.stringify(response));
           return response;
         });
       } catch (errResp) {
         throw errResp;
       }
-      console.log(resp);
       // return resp;
       // const client = new es.Client({
       //   node: elasticsearchHost,
