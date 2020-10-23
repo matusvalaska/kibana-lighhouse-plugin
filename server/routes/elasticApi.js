@@ -2,7 +2,7 @@ import es from 'elasticsearch';
 // const { Client } = require('@elastic/elasticsearch');
 
 // const elasticsearchHost = 'http://192.168.1.11:9200';
-const elasticsearchHost = 'http://10.244.7.29:9200';
+const elasticsearchHost = 'https://10.244.7.29:9200';
 const elasticsearchIndex = 'speed-000003';
 
 function getIndexRequestBody(gte, lte) {
