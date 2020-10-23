@@ -22,8 +22,8 @@ export class ReportsList extends React.Component {
   }
   getMockedData = () => {
     axios.get('http://localhost:5000/').then((response) => {
-      this.setState({ hits: response.data.body.hits.hits });
       console.log(response);
+      this.setState({ hits: response.data.body.hits.hits });
       console.log(this.state.hits);
     });
   };
@@ -38,8 +38,8 @@ export class ReportsList extends React.Component {
           this.state.endDate.unix() * 1000
       )
       .then((response) => {
-        this.setState({ hits: response.data.body.hits.hits });
         console.log(response);
+        this.setState({ hits: response.data.hits.hits });
         console.log(this.state.hits);
       });
   };
