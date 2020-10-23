@@ -29,6 +29,7 @@ export class ReportsList extends React.Component {
   };
   getElasticSearchData = () => {
     const { httpClient } = this.props;
+    console.log(httpClient);
     httpClient
       .get(
         '../api/kibana-lighthouse-plugin/elasticApi/lighthouse/report' +

@@ -1,4 +1,4 @@
-import { Client } from 'elasticsearch';
+import es from 'elasticsearch';
 // const { Client } = require('@elastic/elasticsearch');
 
 // const elasticsearchHost = 'http://192.168.1.11:9200';
@@ -16,13 +16,15 @@ export default function (server) {
   };
   callWithInternalUser('cat.indices', internalQuery).then((response) => {
     console.log('Cluster indices:' + response);
-    const client = new Client({
-      node: elasticsearchHost,
-    });
     server.route({
       path: '/api/kibana-lighthouse-plugin/elasticApi/lighthouse/report',
       method: 'GET',
       async handler(req, reply) {
+        const client = new es.Client({
+          node: elasticsearchHost,
+          host: elasticsearchHost,
+          hosts: elasticsearchHost,
+        });
         const queryParams = req.query;
         return await client.search({
           index: elasticsearchIndex,

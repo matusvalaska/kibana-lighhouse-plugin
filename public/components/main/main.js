@@ -25,7 +25,10 @@ export class Main extends React.Component {
     this.handleChangeEnd = this.handleChangeEnd.bind(this);
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    const { httpClient } = this.props;
+    console.log(httpClient);
+  }
 
   handleChangeStart(date) {
     this.setState({
@@ -85,7 +88,7 @@ export class Main extends React.Component {
             <EuiPageContentBody>
               <EuiPageContent>
                 <React.Fragment>
-                  <ReportsList startDate={this.state.startDate} endDate={this.state.endDate} />
+                  <ReportsList startDate={this.state.startDate} endDate={this.state.endDate} httpClient={this.props.httpClient}/>
                 </React.Fragment>
               </EuiPageContent>
             </EuiPageContentBody>
