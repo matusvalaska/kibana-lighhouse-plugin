@@ -25,10 +25,7 @@ export class Main extends React.Component {
     this.handleChangeEnd = this.handleChangeEnd.bind(this);
   }
 
-  componentDidMount() {
-    const { httpClient } = this.props;
-    console.log(httpClient);
-  }
+  componentDidMount() {}
 
   handleChangeStart(date) {
     this.setState({
