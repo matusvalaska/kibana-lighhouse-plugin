@@ -31,7 +31,7 @@ export class ReportsList extends React.Component {
     const { httpClient } = this.props;
     httpClient
       .get(
-        '../api/kibana-lighthouse-plugin/elasticApi/lighthouse/report' +
+        '../api/kibana-lighthouse-plugin/report' +
           '?gte=' +
           this.state.startDate.unix() * 1000 +
           '&lte=' +
@@ -39,19 +39,18 @@ export class ReportsList extends React.Component {
       )
       .then((response) => {
         console.log(response);
-        this.setState({ hits: response.data.hits.hits });
-        console.log(this.state.hits);
+        // this.setState({ hits: response.data.hits.hits });
+        // console.log(this.state.hits);
       });
   };
   getReportsData = () => {
     // this.getMockedData();
     this.getElasticSearchData();
   };
-  testFunction = () => {
-    console.log('myPassedTest');
-  };
   render() {
     const { hits } = this.state;
+    console.log(hits);
+    console.log(this.state);
     return hits.map((hit, index) => (
       <div key={uuidv4()}>
         <EuiAccordion

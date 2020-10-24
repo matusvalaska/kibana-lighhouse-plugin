@@ -1,8 +1,3 @@
-import es from 'elasticsearch';
-// const { Client } = require('@elastic/elasticsearch');
-
-// const elasticsearchHost = 'http://192.168.1.11:9200';
-// const elasticsearchHost = 'https://10.244.7.29:9200';
 const elasticsearchIndex = 'speed-000003';
 
 function getIndexRequestBody(gte, lte) {
@@ -12,7 +7,7 @@ function getIndexRequestBody(gte, lte) {
 export default function (server) {
   const { callWithRequest } = server.plugins.elasticsearch.getCluster('data');
   server.route({
-    path: '/api/kibana-lighthouse-plugin/elasticApi/lighthouse/report',
+    path: '/api/kibana-lighthouse-plugin/report',
     method: 'GET',
     async handler(req, reply) {
       const internalQuery = {
@@ -23,26 +18,11 @@ export default function (server) {
       };
       try {
         return await callWithRequest(req, 'search', internalQuery).then((response) => {
-          console.log('Cluster indices:' + JSON.stringify(response));
           return response;
         });
       } catch (errResp) {
         throw errResp;
       }
-      // return resp;
-      // const client = new es.Client({
-      //   node: elasticsearchHost,
-      //   host: elasticsearchHost,
-      //   hosts: elasticsearchHost,
-      // });
-      // const queryParams = req.query;
-
-      // return await client.search({
-      //   index: elasticsearchIndex,
-      //   // q: query,
-      //   body: JSON.parse(getIndexRequestBody(queryParams.gte, queryParams.lte)),
-      // });
     },
   });
-  // });
 }

@@ -53,6 +53,7 @@ export class Main extends React.Component {
             <EuiPageContentHeader>
               <EuiPageContent>
                 <EuiDatePickerRange
+                  style={{ maxWidth: '450px' }}
                   startDateControl={
                     <EuiDatePicker
                       selected={this.state.startDate}
@@ -85,7 +86,11 @@ export class Main extends React.Component {
             <EuiPageContentBody>
               <EuiPageContent>
                 <React.Fragment>
-                  <ReportsList startDate={this.state.startDate} endDate={this.state.endDate} httpClient={this.props.httpClient}/>
+                  <ReportsList
+                    startDate={this.state.startDate}
+                    endDate={this.state.endDate}
+                    httpClient={this.props.httpClient}
+                  />
                 </React.Fragment>
               </EuiPageContent>
             </EuiPageContentBody>
