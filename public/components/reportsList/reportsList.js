@@ -2,7 +2,7 @@ import React from 'react';
 import { EuiAccordion, EuiSpacer } from '@elastic/eui';
 import { v4 as uuidv4 } from 'uuid';
 import ReportViewer from 'react-lighthouse-viewer';
-import axios from 'axios';
+// import axios from 'axios';
 
 export class ReportsList extends React.Component {
   constructor(props) {
