@@ -28,14 +28,14 @@ export class ReportsList extends React.Component {
   //   });
   // };
   getElasticSearchData = () => {
-    const { httpClient } = this.props;
+    const { httpClient, startDate, endDate } = this.props;
     httpClient
       .get(
         '../api/kibana-lighthouse-plugin/report' +
           '?gte=' +
-          this.state.startDate.unix() * 1000 +
+          startDate.unix() * 1000 +
           '&lte=' +
-          this.state.endDate.unix() * 1000
+          endDate.unix() * 1000
       )
       .then((response) => {
         this.setState({ hits: response.data.hits.hits });
