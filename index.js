@@ -3,7 +3,6 @@ import { existsSync } from 'fs';
 
 import { i18n } from '@kbn/i18n';
 
-import exampleRoute from './server/routes/example';
 import elasticApi from './server/routes/elasticApi';
 
 export default function (kibana) {
@@ -68,7 +67,6 @@ export default function (kibana) {
       }
 
       // Add server routes and initialize the plugin here
-      exampleRoute(server);
       elasticApi(server);
       const message = `Server adress is ${server.info.uri}`;
       server.log(['info'], message + '***************** ****************');

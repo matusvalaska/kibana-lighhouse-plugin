@@ -2,7 +2,8 @@ import React from 'react';
 import { EuiAccordion, EuiSpacer } from '@elastic/eui';
 import { v4 as uuidv4 } from 'uuid';
 import ReportViewer from 'react-lighthouse-viewer';
-// import axios from 'axios';
+import moment from 'moment';
+import axios from 'axios';
 
 export class ReportsList extends React.Component {
   constructor(props) {
@@ -17,25 +18,32 @@ export class ReportsList extends React.Component {
     this.getReportsData();
   }
   componentDidUpdate(prevProps) {
-    const { startDate, endDate } = this.props;
-    if (startDate !== prevProps.startDate || endDate !== prevProps.endDate) this.getReportsData();
+    const { startDate, endDate, selectedIndex } = this.props;
+    if (
+      startDate !== prevProps.startDate ||
+      endDate !== prevProps.endDate ||
+      selectedIndex !== prevProps.selectedIndex
+    )
+      this.getReportsData();
   }
-  // getMockedData = () => {
-  //   axios.get('http://localhost:5000/').then((response) => {
-  //     console.log(response);
-  //     this.setState({ hits: response.data.body.hits.hits });
-  //     console.log(this.state.hits);
-  //   });
-  // };
+  getMockedData = () => {
+    axios.get('http://localhost:5000/').then((response) => {
+      this.setState({ hits: response.data.body.hits.hits });
+    });
+  };
   getElasticSearchData = () => {
-    const { httpClient, startDate, endDate } = this.props;
+    const { httpClient, startDate, endDate, resultsSize, selectedIndex } = this.props;
     httpClient
       .get(
         '../api/kibana-lighthouse-plugin/report' +
           '?gte=' +
           startDate.unix() * 1000 +
           '&lte=' +
-          endDate.unix() * 1000
+          endDate.unix() * 1000 +
+          '&size=' +
+          resultsSize +
+          '&selectedIndex=' +
+          selectedIndex
       )
       .then((response) => {
         this.setState({ hits: response.data.hits.hits });
@@ -51,7 +59,11 @@ export class ReportsList extends React.Component {
       <div key={uuidv4()}>
         <EuiAccordion
           id={'accordionLighthouseReport' + index}
-          buttonContent={hit._source.dateTime}
+          buttonContent={
+            moment(new Date(hit._source.dateTime)).format('MMM DD, YYYY HH:mm:ss') +
+            ' -> ' +
+            hit._source.fileName
+          }
           paddingSize="l"
         >
           <ReportViewer id={'lighthouseReport' + index} json={JSON.parse(hit._source.message)} />
