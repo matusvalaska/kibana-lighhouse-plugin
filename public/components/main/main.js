@@ -65,8 +65,8 @@ export class Main extends React.Component {
                 <EuiFlexItem grow={false}>
                   <IndexSelector getSelectedIndex={this.getSelectedIndex} />
                 </EuiFlexItem>
-                <EuiFlexItem />
-                <EuiFlexItem grow={false}>
+                <EuiFlexItem grow={false} />
+                <EuiFlexItem>
                   <EuiDatePickerRange
                     style={{ maxWidth: '450px' }}
                     startDateControl={
